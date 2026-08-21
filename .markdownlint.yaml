@@ -1,0 +1,3 @@
+# Same as rails-agent-skills: YAML descriptions and skill tables exceed 80 cols.
+MD013: false
+MD060: false

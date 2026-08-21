@@ -51,7 +51,8 @@ test -f "$FIXTURE_DIFF"
 env -u GITHUB_ACTIONS -u GITHUB_TOKEN -u PR_NUMBER -u REPO_FULL_NAME \
   "$DRY_RUN_BIN" \
   --diff-file "$FIXTURE_DIFF" \
-  --prompt-file "$REPO_ROOT/.github/review-prompt.md" \
+   --model deepseek-v4-flash \
+  --rules-file "$REPO_ROOT/.github/review-prompt.md" \
   --dry-run | tee "$OUTPUT_FILE"
 
 grep -q "DRY RUN" "$OUTPUT_FILE" || {

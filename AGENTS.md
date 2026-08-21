@@ -34,7 +34,7 @@ Before commit:
 ```bash
 git diff --cached --unified=5 > /tmp/staged.diff
 # rs-guard 1.8.0 — prompt: .github/review-prompt.md
-rs-guard --diff-file /tmp/staged.diff --prompt-file .github/review-prompt.md --dry-run
+rs-guard --diff-file /tmp/staged.diff --rules-file .github/review-prompt.md --dry-run  --model deepseek-v4-flash
 ```
 
 CI installs via `scripts/rs-guard-install.sh` (`cargo install rs-guard --locked --version 1.8.0`). Pre-commit: `hooks/pre-commit-rs-guard` (advisory).

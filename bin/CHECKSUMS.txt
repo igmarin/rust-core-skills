@@ -1,0 +1,12 @@
+# rs-guard binaries — SHA-256 checksums
+# Version: 1.8.0
+# Source: crates.io crate rs-guard 1.8.0 (https://github.com/nebulaideas/rs-guard/releases/tag/v1.8.0)
+#
+# CI installs via `cargo install rs-guard --locked --version 1.8.0`
+# (scripts/rs-guard-install.sh). The macOS binary below is the local cache
+# for arm64 hosts; it is not used in GitHub Actions.
+#
+# To verify:
+#   shasum -a 256 bin/rs-guard-macos-arm64
+#
+89e9ee031171b25586da85193a83a963bc3dc87b947ecfa528522221a8e5b744  rs-guard-macos-arm64

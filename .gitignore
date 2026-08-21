@@ -1,0 +1,13 @@
+.DS_Store
+
+# rs-guard CI artifacts (scripts/rs-guard-install.sh)
+/rs-guard
+/.rs-guard-cargo-root/
+
+# rs-guard runtime
+.rs-guard/
+report.md
+review-result.txt
+rs-guard-metrics.json
+.rs-guard-allowlist.md
+.rs-guard/cache/

@@ -1,0 +1,8 @@
+# Pinned rs-guard for CI and local review.
+# v1.8.0 GitHub release has no prebuilt ELF; install from crates.io.
+#
+# RS_GUARD_VERSION: git tag / display version
+# RS_GUARD_CRATE_VERSION: crates.io version passed to `cargo install --version`
+RS_GUARD_VERSION="v1.8.0"
+RS_GUARD_CRATE_VERSION="1.8.0"
+RS_GUARD_INSTALL="cargo"

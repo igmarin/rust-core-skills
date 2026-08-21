@@ -23,19 +23,26 @@ Depends on planning for PRDs. Does **not** depend on ruby-core.
 
 `directory.json` is the registry of **written** skills: 5 atomics, 1 playbook, 1 orchestrator. Planned names: [`docs/topic-inventory.md`](docs/topic-inventory.md).
 
-Entry for agents: [`SKILL.md`](SKILL.md). Conventions: [`AGENTS.md`](AGENTS.md). FP rules: [`docs/fcis-rust.md`](docs/fcis-rust.md).
+Agent router: [`skills/rust-skill-router/SKILL.md`](skills/rust-skill-router/SKILL.md). Conventions: [`AGENTS.md`](AGENTS.md). FP: [`docs/fcis-rust.md`](docs/fcis-rust.md).
 
 ## Install
 
-Once this repo is public on GitHub as `igmarin/rust-core-skills`:
+There is **no** root `SKILL.md`. Each folder under `skills/` is its own skill, so the CLI can prompt for **all** or **one**.
 
 ```bash
+# picker: all skills, or a subset
 npx skills add igmarin/rust-core-skills
+
+# all skills, skip prompts
+npx skills add igmarin/rust-core-skills --skill '*'
+
+# one skill
+npx skills add igmarin/rust-core-skills --skill rust-essentials
 ```
 
-Repo page: [skills.sh/igmarin/rust-core-skills](https://skills.sh/igmarin/rust-core-skills). Groupings for that page live in [`skills.sh.json`](skills.sh.json) (display only; it does not change `SKILL.md` files).
+Repo page: [skills.sh/igmarin/rust-core-skills](https://skills.sh/igmarin/rust-core-skills). Groupings: [`skills.sh.json`](skills.sh.json) (display only).
 
-Load `SKILL.md`, then `load-context` (existing crates) and the matching playbook. Do not install this pack by copying paths from someone else’s home directory.
+After install, use `load-context` on an existing crate, then `tdd` or `rust-essentials`. Do not copy paths from someone else’s home directory.
 
 Skill diffs are reviewed with **rs-guard 1.8.0** using [`.github/review-prompt.md`](.github/review-prompt.md). Local: `cargo install rs-guard --version 1.8.0 --locked`.
 

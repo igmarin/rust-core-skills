@@ -14,7 +14,7 @@ Portable, lean, gated. A skill is done when an agent can execute it — not when
 
 ## Location
 
-`skills/<domain>/<skill-name>/SKILL.md`
+`skills/<skill-name>/SKILL.md` (one folder per skill so `npx skills add` can list each one)
 
 Project-relative paths only (`Cargo.toml`, `src/`, `tests/`, `assets/` in the skill folder). No `/Users/`, `/home/`, `C:\`, vaults, `~/.cargo` as a default.
 

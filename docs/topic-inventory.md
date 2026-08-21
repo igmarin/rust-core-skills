@@ -6,39 +6,39 @@ The old 265 one-rule files are **titles only**. Bodies were a style-guide dump; 
 
 ## Not written (planned skill ids)
 
-When a skill is written, add it to `directory.json`, `skills.sh.json`, and the router. Playbook review lives at `skills/playbooks/code-review-playbook/` (`name: code-review-playbook`), never `skills/playbooks/code-review/`.
+When a skill is written, add `skills/<name>/SKILL.md` plus entries in `directory.json`, `skills.sh.json`, and the router.
 
 | Planned id | Intended path |
 |------------|---------------|
-| `iterator-pipelines` | `skills/functional/iterator-pipelines/` |
-| `result-combinators` | `skills/functional/result-combinators/` |
-| `closures-and-hof` | `skills/functional/closures-and-hof/` |
-| `tokio-essentials` | `skills/async/tokio-essentials/` |
-| `async-concurrency` | `skills/async/async-concurrency/` |
-| `rayon-and-threads` | `skills/concurrency/rayon-and-threads/` |
-| `unsafe-essentials` | `skills/unsafe/unsafe-essentials/` |
-| `public-api-design` | `skills/api/public-api-design/` |
-| `conversions-and-traits` | `skills/api/conversions-and-traits/` |
-| `serde-essentials` | `skills/api/serde-essentials/` |
-| `macros-essentials` | `skills/api/macros-essentials/` |
-| `testing-essentials` | `skills/testing/testing-essentials/` |
-| `property-based-testing` | `skills/testing/property-based-testing/` |
-| `async-testing` | `skills/testing/async-testing/` |
-| `rustdoc-essentials` | `skills/docs/rustdoc-essentials/` |
-| `tracing-essentials` | `skills/observability/tracing-essentials/` |
-| `cargo-workspace` | `skills/project/cargo-workspace/` |
-| `allocation-discipline` | `skills/project/allocation-discipline/` |
-| `performance-tuning` | `skills/project/performance-tuning/` |
-| `clippy-fmt` | `skills/quality/clippy-fmt/` |
-| `code-review` | `skills/quality/code-review/` |
-| `security-essentials` | `skills/quality/security-essentials/` |
-| `clap-cli` | `skills/cli/clap-cli/` |
-| `bug-fix` | `skills/playbooks/bug-fix/` |
-| `quality` | `skills/playbooks/quality/` |
-| `code-review-playbook` | `skills/playbooks/code-review-playbook/` |
-| `setup` | `skills/playbooks/setup/` |
-| `new-crate` | `skills/playbooks/new-crate/` |
-| `unsafe-change` | `skills/playbooks/unsafe-change/` |
+| `iterator-pipelines` | `skills/iterator-pipelines/` |
+| `result-combinators` | `skills/result-combinators/` |
+| `closures-and-hof` | `skills/closures-and-hof/` |
+| `tokio-essentials` | `skills/tokio-essentials/` |
+| `async-concurrency` | `skills/async-concurrency/` |
+| `rayon-and-threads` | `skills/rayon-and-threads/` |
+| `unsafe-essentials` | `skills/unsafe-essentials/` |
+| `public-api-design` | `skills/public-api-design/` |
+| `conversions-and-traits` | `skills/conversions-and-traits/` |
+| `serde-essentials` | `skills/serde-essentials/` |
+| `macros-essentials` | `skills/macros-essentials/` |
+| `testing-essentials` | `skills/testing-essentials/` |
+| `property-based-testing` | `skills/property-based-testing/` |
+| `async-testing` | `skills/async-testing/` |
+| `rustdoc-essentials` | `skills/rustdoc-essentials/` |
+| `tracing-essentials` | `skills/tracing-essentials/` |
+| `cargo-workspace` | `skills/cargo-workspace/` |
+| `allocation-discipline` | `skills/allocation-discipline/` |
+| `performance-tuning` | `skills/performance-tuning/` |
+| `clippy-fmt` | `skills/clippy-fmt/` |
+| `code-review` | `skills/code-review/` |
+| `security-essentials` | `skills/security-essentials/` |
+| `clap-cli` | `skills/clap-cli/` |
+| `bug-fix` | `skills/bug-fix/` |
+| `quality` | `skills/quality/` |
+| `code-review-playbook` | `skills/code-review-playbook/` |
+| `setup` | `skills/setup/` |
+| `new-crate` | `skills/new-crate/` |
+| `unsafe-change` | `skills/unsafe-change/` |
 
 ## rust-essentials
 

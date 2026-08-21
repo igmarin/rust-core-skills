@@ -14,7 +14,7 @@ metadata:
 
 # Rust essentials
 
-Canonical: [`docs/fcis-rust.md`](../../../docs/fcis-rust.md)
+Canonical: [`docs/fcis-rust.md`](../../docs/fcis-rust.md)
 
 ## Goal
 
@@ -36,7 +36,7 @@ Adding a dependency, `unsafe`, or toolchain install.
 
 ## RULES — no exceptions
 
-1. Apply [`docs/fcis-rust.md`](../../../docs/fcis-rust.md) (ladder + six FCIS rules). Do not restate them here.
+1. Apply [`docs/fcis-rust.md`](../../docs/fcis-rust.md) (ladder + six FCIS rules). Do not restate them here.
 2. **Names:** types `UpperCamelCase`, fns `snake_case`, consts `SCREAMING_SNAKE`; acronyms as words (`HttpServer`)
 3. **Never skip:** trust-boundary parse, `Result`, `// SAFETY:`, one failing test for non-trivial logic
 

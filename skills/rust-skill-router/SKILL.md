@@ -5,7 +5,7 @@ tags: [orchestration]
 license: MIT
 description: >
   Routes a Rust task to one playbook or atomic. Does not implement.
-  First response line MUST be "Next skill: skills/<domain>/<name>".
+  First response line MUST be "Next skill: skills/<name>".
   Trigger: where do I start, rust help, which skill, rust-core-skills.
 metadata:
   version: "1.0.0"
@@ -25,7 +25,7 @@ Pick **one** next skill. Do not write application code here.
 
 ## Reads / writes
 
-- Read: this file, `directory.json`, root `SKILL.md`
+- Read: this file, `directory.json`, `README.md`
 - Write: none
 
 ## Approval
@@ -34,24 +34,24 @@ None.
 
 ## Route
 
-Load only paths that exist in `directory.json`. No skill yet → `Next skill: skills/rust-core/rust-essentials` (and `skills/playbooks/tdd` if behaviour changes).
+Load only paths that exist in `directory.json`. No skill yet → `Next skill: skills/rust-essentials` (and `skills/tdd` if behaviour changes).
 
 | If the request is… | Next skill |
 |--------------------|------------|
 | PRD / tickets / sprint | **stop** — `agnostic-planning-skills` |
-| Existing crate, first action | `skills/project/load-context` |
-| New or changed behaviour / TDD / bug | `skills/playbooks/tdd` |
-| Clone / lifetime / Arc | `skills/rust-core/ownership-borrowing` |
-| Newtype / enum state | `skills/rust-core/type-driven-design` |
-| unwrap / thiserror | `skills/rust-core/error-handling` |
-| Anything `.rs`, including clap/tokio/unsafe/clippy until those skills exist | `skills/rust-core/rust-essentials` |
+| Existing crate, first action | `skills/load-context` |
+| New or changed behaviour / TDD / bug | `skills/tdd` |
+| Clone / lifetime / Arc | `skills/ownership-borrowing` |
+| Newtype / enum state | `skills/type-driven-design` |
+| unwrap / thiserror | `skills/error-handling` |
+| Anything `.rs`, including clap/tokio/unsafe/clippy until those skills exist | `skills/rust-essentials` |
 
 Several rows match → `load-context` then `tdd`.
 
 ## Steps
 
 1. Classify with the table
-2. First line: `Next skill: skills/<domain>/<name>`
+2. First line: `Next skill: skills/<name>`
 3. Stop — do not write crate code
 
 ## Validation
@@ -60,4 +60,4 @@ No `.rs` in the crate was written in this turn.
 
 ## Integration
 
-Root catalog: `SKILL.md`. Registry: `directory.json`.
+Human catalog: `README.md`. Registry: `directory.json`.

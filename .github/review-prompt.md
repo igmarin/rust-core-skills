@@ -15,7 +15,7 @@ acceptable. Prefer a short, correct skill over a long one.
 
 ## 1. Skill structure
 
-Every skill lives at `skills/<domain>/<name>/SKILL.md` with YAML frontmatter.
+Every skill lives at `skills/<name>/SKILL.md` with YAML frontmatter. Do not nest under domain folders (the skills CLI only lists `skills/*/SKILL.md` unless `--full-depth` is passed, and a root `SKILL.md` hides nested skills).
 
 **Blocking:**
 
@@ -107,7 +107,7 @@ Canonical: `docs/fcis-rust.md`.
 **Blocking:**
 
 - `rust-skill-router` must not implement application code
-- First line of the agent contract must be `Next skill: skills/<domain>/<name>`
+- First line of the agent contract must be `Next skill: skills/<name>`
 - Planning/PRD/tickets must route out to `agnostic-planning-skills`, not be re-taught here
 
 ---
@@ -119,7 +119,8 @@ Canonical: `docs/fcis-rust.md`.
 - Added/renamed/removed skills must update `directory.json` `skills` and `inventory` counts
 - Every `directory.json` path **must exist on disk**. Flag extra registry rows
 - Every `skills/**/SKILL.md` **must** be a `directory.json` key. Flag unregistered files
-- Root `SKILL.md` and `rust-skill-router` Route tables must name only `directory.json` keys (or an explicit stop to planning-skills)
+- `README.md` and `rust-skill-router` Route tables must name only `directory.json` keys (or an explicit stop to planning-skills)
+- Do not add a root `SKILL.md` (it makes `npx skills add` install one skill and skip `skills/`)
 - `docs/topic-inventory.md` holds planned / old-rule IDs that are **not** loadable until they have a SKILL.md
 - If `CHANGELOG.md` exists, skill additions and rs-guard/tooling changes must appear under `[Unreleased]` or a new version
 - Do not restate the FCIS ladder outside `docs/fcis-rust.md`

@@ -17,7 +17,7 @@ See `docs/taxonomy.md`. Docs: `docs/fcis-rust.md`, `docs/playbooks.md`, `docs/sk
 1. `skills/**/SKILL.md`
 2. This file
 3. `docs/fcis-rust.md` and other `docs/`
-4. Root `SKILL.md` (catalog)
+4. `README.md` (human catalog)
 
 ## Authoring
 

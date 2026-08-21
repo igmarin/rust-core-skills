@@ -1,24 +1,12 @@
 # Taxonomy
 
-Domain folders. Place a skill by **what it teaches**.
+Physical layout is **flat** so `npx skills add` lists each skill:
 
 ```text
-skills/
-├── rust-core/         language spine (always first)
-├── functional/        iterators, Result combinators, closures
-├── async/             tokio, cancellation
-├── concurrency/       rayon, threads, atomics
-├── unsafe/            SAFETY, Miri
-├── api/               public crate surface, serde, macros
-├── testing/           cargo test, proptest
-├── docs/              rustdoc
-├── observability/     tracing
-├── project/           load-context, cargo, alloc, perf
-├── quality/           clippy, review rules, security
-├── cli/               clap
-├── playbooks/         HITL multi-step
-└── orchestration/     rust-skill-router only
+skills/<skill-name>/SKILL.md
 ```
+
+Logical groups (Rust Core, Playbooks, …) live in `skills.sh.json`, not in nested folders. Do not add a root `SKILL.md` — the skills CLI then installs the repo as one skill and skips `skills/`.
 
 | Kind | `type` | Role |
 |------|--------|------|

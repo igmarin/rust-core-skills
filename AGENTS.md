@@ -1,4 +1,4 @@
-# Agent guidance for rust-skills
+# Agent guidance for rust-core-skills
 
 Single source of truth for work **in this repository**. Skills the pack teaches live under `skills/`.
 

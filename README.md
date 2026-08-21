@@ -1,4 +1,4 @@
-# Rust Skills
+# Rust Core Skills
 
 Agent skills for idiomatic Rust: FCIS, ownership, type-driven design, cargo TDD.
 
@@ -14,7 +14,7 @@ This pack is the Rust language layer. It does not replace the others.
 | [`ruby-core-skills`](https://github.com/igmarin/ruby-core-skills) | Ruby process + DDD |
 | [`rails-agent-skills`](https://github.com/igmarin/rails-agent-skills) | Rails |
 | [`elixir-phoenix-skills`](https://github.com/igmarin/elixir-phoenix-skills) | Elixir / Phoenix |
-| **rust-skills** (this repo) | Rust / cargo |
+| **rust-core-skills** (this repo) | Rust / cargo |
 | [`agent-mcp-runtime`](https://github.com/igmarin/agent-mcp-runtime) | Pack loader |
 
 Depends on planning for PRDs. Does **not** depend on ruby-core.
@@ -27,13 +27,13 @@ Entry for agents: [`SKILL.md`](SKILL.md). Conventions: [`AGENTS.md`](AGENTS.md).
 
 ## Install
 
-Once this repo is public on GitHub as `igmarin/rust-skills`:
+Once this repo is public on GitHub as `igmarin/rust-core-skills`:
 
 ```bash
-npx skills add igmarin/rust-skills
+npx skills add igmarin/rust-core-skills
 ```
 
-Repo page: [skills.sh/igmarin/rust-skills](https://skills.sh/igmarin/rust-skills). Groupings for that page live in [`skills.sh.json`](skills.sh.json) (display only; it does not change `SKILL.md` files).
+Repo page: [skills.sh/igmarin/rust-core-skills](https://skills.sh/igmarin/rust-core-skills). Groupings for that page live in [`skills.sh.json`](skills.sh.json) (display only; it does not change `SKILL.md` files).
 
 Load `SKILL.md`, then `load-context` (existing crates) and the matching playbook. Do not install this pack by copying paths from someone else’s home directory.
 

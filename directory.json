@@ -1,5 +1,5 @@
 {
-  "name": "igmarin/rust-skills",
+  "name": "igmarin/rust-core-skills",
   "version": "0.1.0",
   "license": "MIT",
   "depends_on": ["igmarin/agnostic-planning-skills"],

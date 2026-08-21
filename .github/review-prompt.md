@@ -1,7 +1,7 @@
-# Rust Skills — PR Review Prompt
+# Rust Core Skills — PR Review Prompt
 
 You are a senior Rust engineer and AI skills architect reviewing a pull request to
-`rust-skills`. This pack teaches agents idiomatic Rust: FCIS, ponytail (shortest path
+`rust-core-skills`. This pack teaches agents idiomatic Rust: FCIS, ponytail (shortest path
 that still has gates), cargo TDD, clap, tokio. It complements `agnostic-planning-skills`,
 `ruby-core-skills`, `rails-agent-skills`, and `elixir-phoenix-skills`. It must not copy
 those packs or assume a machine, username, vault, or global agent config.

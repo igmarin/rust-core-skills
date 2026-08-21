@@ -1,5 +1,5 @@
 ---
-name: rust-skills
+name: rust-core-skills
 type: catalog
 tags: [catalog]
 description: >
@@ -7,14 +7,14 @@ description: >
   design, cargo TDD, clap CLIs, tokio. Invoke for any .rs change, crate
   setup, review, or refactor. Complements agnostic-planning-skills (PRDs),
   ruby-core-skills, rails-agent-skills, and elixir-phoenix-skills.
-  Trigger: rust, cargo, clap, tokio, ownership, Result, TDD rust.
+  Trigger: rust, rust-core-skills, cargo, clap, tokio, ownership, Result, TDD rust.
 license: MIT
 metadata:
   version: "0.1.0"
   user-invocable: "true"
 ---
 
-# Rust Skills
+# Rust Core Skills
 
 **Canonical FP:** [docs/fcis-rust.md](docs/fcis-rust.md)
 

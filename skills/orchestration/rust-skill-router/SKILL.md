@@ -6,7 +6,7 @@ license: MIT
 description: >
   Routes a Rust task to one playbook or atomic. Does not implement.
   First response line MUST be "Next skill: skills/<domain>/<name>".
-  Trigger: where do I start, rust help, which skill, rust-skills.
+  Trigger: where do I start, rust help, which skill, rust-core-skills.
 metadata:
   version: "1.0.0"
   user-invocable: "true"

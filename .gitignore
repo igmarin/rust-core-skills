@@ -1,4 +1,5 @@
 .DS_Store
+.serena/
 
 # rs-guard CI artifacts (scripts/rs-guard-install.sh)
 /rs-guard

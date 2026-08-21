@@ -1,4 +1,4 @@
-# rs-guard configuration for rust-skills
+# rs-guard configuration for rust-core-skills
 # See https://github.com/nebulaideas/rs-guard/blob/main/docs/CONFIGURATION.md
 
 provider = "deepseek"

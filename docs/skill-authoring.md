@@ -16,6 +16,8 @@ Portable, lean, gated. A skill is done when an agent can execute it — not when
 
 `skills/<skill-name>/SKILL.md` (one folder per skill so `npx skills add` can list each one)
 
+Register every new skill in `directory.json`, `skills.sh.json`, [reference/skill-catalog.md](reference/skill-catalog.md), and the router. Playbooks also go in [playbooks.md](playbooks.md). Planned-only names stay in [topic-inventory.md](topic-inventory.md) until they have a `SKILL.md`.
+
 Project-relative paths only (`Cargo.toml`, `src/`, `tests/`, `assets/` in the skill folder). No `/Users/`, `/home/`, `C:\`, vaults, `~/.cargo` as a default.
 
 Do not install toolchains or add crates without an approval gate.

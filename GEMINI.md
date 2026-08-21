@@ -1,4 +1,4 @@
-# Rust Core Skills — Claude Code
+# Rust Core Skills — Gemini CLI
 
 Read [AGENTS.md](AGENTS.md) and follow it.
 

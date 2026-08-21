@@ -60,4 +60,4 @@ No `.rs` in the crate was written in this turn.
 
 ## Integration
 
-Human catalog: `README.md`. Registry: `directory.json`.
+Human catalog: `README.md`. Registry: `directory.json`. Browse: `docs/reference/skill-catalog.md`.

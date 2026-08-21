@@ -9,3 +9,4 @@
 - `.markdownlint.yaml` (MD013/MD060 off, matching rails-agent-skills); `CLAUDE.md` first-line heading.
 - Pack name: `igmarin/rust-core-skills` (catalog, README, skills.sh, rs-guard prompt).
 - Flatten `skills/<name>/SKILL.md` and drop root `SKILL.md` so `npx skills add` can install all or one skill.
+- README, AGENTS.md, and docs match the slim pack layout used by rails-agent-skills and agnostic-planning-skills (catalog table, install picker, Docs table, host stubs).

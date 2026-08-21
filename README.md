@@ -1,29 +1,48 @@
 # Rust Core Skills
 
-Agent skills for idiomatic Rust: FCIS, ownership, type-driven design, cargo TDD.
+7 written skills for idiomatic Rust: FCIS, ownership, type-driven design, cargo TDD. Complements [`agnostic-planning-skills`](https://github.com/igmarin/agnostic-planning-skills) for PRDs. Does **not** depend on `ruby-core-skills`.
 
-Canonical FP: [`docs/fcis-rust.md`](docs/fcis-rust.md).
+```text
+Write the test → run cargo test → confirm it fails for the right reason → implement → confirm it passes
+```
 
-## Ecosystem
+```mermaid
+flowchart LR
+  A[Task] --> B[load-context]
+  B --> C[tdd RED]
+  C --> D[HITL approve]
+  D --> E[implement GREEN]
+  E --> F[fmt + clippy]
+  F --> G[PR]
+```
 
-This pack is the Rust language layer. It does not replace the others.
+```mermaid
+flowchart TB
+  subgraph thisRepo[rust-core-skills]
+    atomics[5 atomics]
+    playbooks[1 playbook]
+    router[rust-skill-router]
+  end
+  planning[agnostic-planning-skills]
+  thisRepo --> planning
+```
 
-| Repo | Role |
-|------|------|
-| [`agnostic-planning-skills`](https://github.com/igmarin/agnostic-planning-skills) | PRD, tickets, sprint |
-| [`ruby-core-skills`](https://github.com/igmarin/ruby-core-skills) | Ruby process + DDD |
-| [`rails-agent-skills`](https://github.com/igmarin/rails-agent-skills) | Rails |
-| [`elixir-phoenix-skills`](https://github.com/igmarin/elixir-phoenix-skills) | Elixir / Phoenix |
-| **rust-core-skills** (this repo) | Rust / cargo |
-| [`agent-mcp-runtime`](https://github.com/igmarin/agent-mcp-runtime) | Pack loader |
+Also in the same ecosystem: [`ruby-core-skills`](https://github.com/igmarin/ruby-core-skills), [`rails-agent-skills`](https://github.com/igmarin/rails-agent-skills), [`elixir-phoenix-skills`](https://github.com/igmarin/elixir-phoenix-skills), [`agent-mcp-runtime`](https://github.com/igmarin/agent-mcp-runtime).
 
-Depends on planning for PRDs. Does **not** depend on ruby-core.
+Name the router when the next skill is unclear: `rust-skill-router`. Name `tdd` when behaviour changes. Canonical FP: [`docs/fcis-rust.md`](docs/fcis-rust.md).
 
 ## Catalog
 
-`directory.json` is the registry of **written** skills: 5 atomics, 1 playbook, 1 orchestrator. Planned names: [`docs/topic-inventory.md`](docs/topic-inventory.md).
+| Area | Skills |
+|------|--------|
+| Rust core | `rust-essentials`, `ownership-borrowing`, `type-driven-design`, `error-handling` |
+| Project | `load-context` |
+| Playbooks | `tdd` |
+| Orchestration | `rust-skill-router` |
 
-Agent router: [`skills/rust-skill-router/SKILL.md`](skills/rust-skill-router/SKILL.md). Conventions: [`AGENTS.md`](AGENTS.md). FP: [`docs/fcis-rust.md`](docs/fcis-rust.md).
+`directory.json` lists **written** skills only. Planned names: [`docs/topic-inventory.md`](docs/topic-inventory.md). Full list: [`docs/reference/skill-catalog.md`](docs/reference/skill-catalog.md).
+
+On an existing crate, start with `load-context`, then `tdd` or `rust-essentials`.
 
 ## Install
 
@@ -31,6 +50,7 @@ There is **no** root `SKILL.md`. Each folder under `skills/` is its own skill, s
 
 ```bash
 # picker: all skills, or a subset
+npx skills add igmarin/agnostic-planning-skills
 npx skills add igmarin/rust-core-skills
 
 # all skills, skip prompts
@@ -40,12 +60,34 @@ npx skills add igmarin/rust-core-skills --skill '*'
 npx skills add igmarin/rust-core-skills --skill rust-essentials
 ```
 
+Or with GitHub CLI v2.90.0+ (`gh skill`):
+
+```bash
+gh skill install igmarin/rust-core-skills
+gh skill install igmarin/rust-core-skills rust-essentials --scope project
+```
+
 Repo page: [skills.sh/igmarin/rust-core-skills](https://skills.sh/igmarin/rust-core-skills). Groupings: [`skills.sh.json`](skills.sh.json) (display only).
 
-After install, use `load-context` on an existing crate, then `tdd` or `rust-essentials`. Do not copy paths from someone else’s home directory.
+## Docs
 
-Skill diffs are reviewed with **rs-guard 1.8.0** using [`.github/review-prompt.md`](.github/review-prompt.md). Local: `cargo install rs-guard --version 1.8.0 --locked`.
+| Need | Document |
+|------|----------|
+| Host context | [AGENTS.md](AGENTS.md) |
+| Browse all skills | [docs/reference/skill-catalog.md](docs/reference/skill-catalog.md) |
+| Skill layout | [docs/architecture.md](docs/architecture.md) |
+| FCIS | [docs/fcis-rust.md](docs/fcis-rust.md) |
+| Playbooks | [docs/playbooks.md](docs/playbooks.md) |
+| Planned skills | [docs/topic-inventory.md](docs/topic-inventory.md) |
+
+## Contributing
+
+- Artifacts in English unless the user asks otherwise.
+- Keep the tests-gate rule on every code-producing skill.
+- `description` is when + triggers (≤ 600 chars). Procedure stays in the body.
+- Keep public docs in sync with `directory.json`.
+- Flat layout only: `skills/<name>/SKILL.md`. No root `SKILL.md`.
 
 ## License
 
-MIT
+MIT. See [LICENSE](LICENSE).

@@ -1,5 +1,7 @@
 # Taxonomy
 
+See [architecture.md](architecture.md) for SKILL.md conventions and [index.md](index.md) for navigation.
+
 Physical layout is **flat** so `npx skills add` lists each skill:
 
 ```text

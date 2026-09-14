@@ -14,9 +14,11 @@ metadata:
 
 # Rust skill router
 
+Apply the [execution contract](../../docs/agent-contract.md) before this procedure.
+
 ## Goal
 
-Pick **one** next skill. Do not write application code here.
+Select the next procedure, load it, and continue the requested work within its gates.
 
 ## Inputs / outputs
 
@@ -46,13 +48,13 @@ Load only paths that exist in `directory.json`. No skill yet → `Next skill: sk
 | unwrap / thiserror | `skills/error-handling` |
 | Anything `.rs`, including clap/tokio/unsafe/clippy until those skills exist | `skills/rust-essentials` |
 
-Several rows match → `load-context` then `tdd`.
+For existing crates, load `load-context` first. For behavior changes, route to `tdd`; for review or explanations, load only the relevant atomics. Load `rust-essentials` before any `.rs` write. Planning-only work routes to `agnostic-planning-skills` and does not open an implementation loop.
 
 ## Steps
 
 1. Classify with the table
 2. First line: `Next skill: skills/<name>`
-3. Stop — do not write crate code
+3. Stop — do not write crate code.
 
 ## Validation
 

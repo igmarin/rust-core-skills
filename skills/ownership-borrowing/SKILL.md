@@ -13,6 +13,8 @@ metadata:
 
 # Ownership and borrowing
 
+Apply the [execution contract](../../docs/agent-contract.md) before this procedure.
+
 ## Goal
 
 No allocation that a borrow would cover. Shared mutability only when the type system requires it.
@@ -29,7 +31,7 @@ No allocation that a borrow would cover. Shared mutability only when the type sy
 
 ## Approval
 
-None to drop clones. Stop for approval before adding `Arc`, `Rc`, `Mutex`, `RwLock`, or `RefCell`.
+None to drop clones. State lifecycle and concurrency cost before adding `Arc`, `Rc`, `Mutex`, `RwLock`, or `RefCell`; stop for approval if that choice changes the accepted design or scope.
 
 ## RULES — no exceptions
 

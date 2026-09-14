@@ -14,6 +14,8 @@ metadata:
 
 # Error handling
 
+Apply the [execution contract](../../docs/agent-contract.md) before this procedure.
+
 ## Goal
 
 Recoverable failure is `Result`. Panics are bugs, not control flow.
@@ -34,8 +36,8 @@ Adding `thiserror` / `anyhow` if they are not already in `Cargo.toml`.
 
 ## RULES — no exceptions
 
-1. Library crates: `thiserror` (or a small handwritten `enum`) implementing `Error` + `From`
-2. Binary / app crates: `anyhow` (or the lib error) with `.context()`
+1. Library crates: preserve the existing typed error API; use a small handwritten `enum` or existing `thiserror` dependency implementing `Error` and needed conversions
+2. Binary / app crates: use the existing error convention; `anyhow` with `.context()` is an option when already installed, not a required dependency
 3. `?` to propagate; `From` impls make `?` work
 4. No `.unwrap()` on user/IO/parse paths
 5. `.expect("…")` only for proven invariants (a bug if it fires)

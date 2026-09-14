@@ -91,3 +91,7 @@ Repo page: [skills.sh/igmarin/rust-core-skills](https://skills.sh/igmarin/rust-c
 ## License
 
 MIT. See [LICENSE](LICENSE).
+
+## Agent composition and compatibility
+
+Use [the execution contract](docs/agent-contract.md) when applying these skills. If desired, developer roles and host exports can be composed in `igmarin/agent-profiles`; this repository remains authoritative for the skill text and resources. Existing names and paths remain valid. Root `AGENTS.md` is for contributors, not an installed developer role.

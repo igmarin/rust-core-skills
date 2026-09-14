@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- Preserve catalog identities while linking every skill to a portable execution contract: existing authorization, truthful test evidence, project conventions, and resumable handoffs.
+- Repair routing and instruction contradictions without changing supported capabilities.
+
+
 ## [Unreleased]
 
 - White-canvas catalog: FCIS docs, taxonomy, `directory.json`, language spine skills, TDD playbook.

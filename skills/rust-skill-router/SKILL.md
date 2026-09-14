@@ -4,7 +4,7 @@ type: orchestrator
 tags: [orchestration]
 license: MIT
 description: >
-  Routes a Rust task to one playbook or atomic. Does not implement.
+  Routes a Rust task to the required playbook or atomics and continues authorized work.
   First response line MUST be "Next skill: skills/<name>".
   Trigger: where do I start, rust help, which skill, rust-core-skills.
 metadata:
@@ -14,14 +14,16 @@ metadata:
 
 # Rust skill router
 
+Apply the [execution contract](../../docs/agent-contract.md) before this procedure.
+
 ## Goal
 
-Pick **one** next skill. Do not write application code here.
+Select the next procedure, load it, and continue the requested work within its gates.
 
 ## Inputs / outputs
 
 - In: the user request
-- Out: the skill path to load, and nothing else
+- Out: the first skill path and an ordered chain when several procedures are needed
 
 ## Reads / writes
 
@@ -46,17 +48,17 @@ Load only paths that exist in `directory.json`. No skill yet → `Next skill: sk
 | unwrap / thiserror | `skills/error-handling` |
 | Anything `.rs`, including clap/tokio/unsafe/clippy until those skills exist | `skills/rust-essentials` |
 
-Several rows match → `load-context` then `tdd`.
+For existing crates, load `load-context` first. For behavior changes, continue with `tdd`; for review or explanations, load only the relevant atomics. Load `rust-essentials` before any `.rs` write. Planning-only work uses the named planning pack and does not open an implementation loop.
 
 ## Steps
 
 1. Classify with the table
 2. First line: `Next skill: skills/<name>`
-3. Stop — do not write crate code
+3. Load the selected skill and continue if execution was requested; for routing-only requests, return the chain.
 
 ## Validation
 
-No `.rs` in the crate was written in this turn.
+Every selected skill exists in the catalog; changed Rust follows the observed RED/GREEN and quality gates.
 
 ## Integration
 

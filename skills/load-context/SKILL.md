@@ -14,6 +14,8 @@ metadata:
 
 # Load context
 
+Apply the [execution contract](../../docs/agent-contract.md) before this procedure.
+
 ## Goal
 
 Match the crate in front of you, not a generic tutorial.
@@ -49,7 +51,7 @@ None. Read-only.
 
 ## Validation
 
-Summary cites real paths. No code in the same message unless the user already approved skipping this skill.
+Summary cites real paths. Continue into the selected workflow once context is resolved.
 
 ## Output
 

@@ -14,6 +14,8 @@ metadata:
 
 # Type-driven design
 
+Apply the [execution contract](../../docs/agent-contract.md) before this procedure.
+
 ## Goal
 
 Invalid data cannot be constructed past the crate boundary.

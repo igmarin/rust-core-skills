@@ -14,6 +14,8 @@ metadata:
 
 # Rust essentials
 
+Apply the [execution contract](../../docs/agent-contract.md) before this procedure.
+
 Canonical: [`docs/fcis-rust.md`](../../docs/fcis-rust.md)
 
 ## Goal
@@ -81,4 +83,4 @@ RED: `cargo test <test_name> -- --exact`. Done: commands in `docs/skill-authorin
 | Predecessor | This | Successor |
 |-------------|------|-----------|
 | `load-context` | rust-essentials | `ownership-borrowing`, `type-driven-design`, `error-handling` |
-| playbook `tdd` | rust-essentials | implementation after HITL |
+| playbook `tdd` | rust-essentials | implementation after RED |

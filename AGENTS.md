@@ -10,7 +10,7 @@ Implementation waits until a test exists, has been run, and fails because the be
 
 ```text
 load-context (existing crate) → failing test → confirm RED
-  → state implementation approach → implement within authorized scope → confirm GREEN
+  → propose implementation → wait for approval when authority is not already granted → implement → confirm GREEN
   → cargo fmt --check → cargo clippy --all-targets -- -D warnings → cargo test
 ```
 
@@ -20,7 +20,7 @@ load-context (existing crate) → failing test → confirm RED
 flowchart LR
   A[Task] --> B[load-context]
   B --> C[tdd RED]
-  C --> D[Scope check]
+  C --> D[HITL approve when needed]
   D --> E[implement GREEN]
   E --> F[fmt + clippy]
   F --> G[PR]
@@ -50,7 +50,7 @@ Read the matching `SKILL.md` before acting. Descriptions are triggers only — t
 | `ownership-borrowing` | Clone, lifetimes, Arc/Rc, interior mutability. |
 | `type-driven-design` | Newtypes, enum state, typestate, `TryFrom` at the boundary. |
 | `error-handling` | `Result`, `?`, thiserror/anyhow, unwrap on recoverable errors. |
-| `tdd` | New or changed behaviour. RED → scope check → GREEN → quality gate. |
+| `tdd` | New or changed behaviour. RED → approval or prior authorization → GREEN → quality gate. |
 | `rust-skill-router` | Unclear next skill. First line: `Next skill: skills/<name>`. Does not implement. |
 
 Planned IDs in [docs/topic-inventory.md](docs/topic-inventory.md) are **not written**. Do not route to them.
@@ -58,7 +58,7 @@ Planned IDs in [docs/topic-inventory.md](docs/topic-inventory.md) are **not writ
 ## Hard gates (never skip)
 
 1. **Read the skill before applying it.** Match on frontmatter `name` / `description`, then load full `SKILL.md`.
-2. **Honor test and quality gates** inside each skill. Existing authorization covers routine implementation; ask only when scope or authority must change.
+2. **Honor HARD-GATE blocks** inside each skill. Do not proceed past an approval gate without an explicit user signal or authorization already granted for this task.
 3. **English artifacts** unless the user explicitly requests another language.
 4. **No machine paths.** Skills must not mention `/Users/`, `/home/`, `C:\`, or vaults.
 5. **`directory.json` is the registry.** Only keys there are loadable.

@@ -1,91 +1,19 @@
 ---
 name: error-handling
 type: atomic
-tags: [atomic]
-license: MIT
-description: >
-  Result over panic. thiserror in libs, anyhow in bins. ? propagation, no
-  unwrap on recoverable errors. Trigger: thiserror, anyhow, unwrap, expect,
-  ?, error chain, eyre.
+description: Use when changing Rust error propagation, public error types, or recoverable failure behavior.
 metadata:
-  version: "1.0.0"
   user-invocable: "true"
 ---
 
-# Error handling
+# Error Handling
 
-Apply the [execution contract](../../docs/agent-contract.md) before this procedure.
+Preserve the crate's existing error contract. Use `Result` for failures callers can handle; reserve panic for violated internal invariants.
 
-## Goal
+- Propagate expected errors with `?` and add context at the boundary where it helps diagnose the operation.
+- Preserve typed errors when they are part of a library's public API. A small enum or the crate's existing error dependency is sufficient.
+- In applications, follow the existing convention. `anyhow` or a similar crate is optional when already used; do not add a dependency just to wrap one error.
+- Do not unwrap user input, IO, network, or parse results. `expect` is appropriate only when the invariant is local and its violation indicates a bug.
+- Keep error messages useful and avoid exposing secrets or sensitive input.
 
-Recoverable failure is `Result`. Panics are bugs, not control flow.
-
-## Inputs / outputs
-
-- In: a fallible operation
-- Out: `Result<T, E>` with a useful `E`, or a typed panic only for invariants
-
-## Reads / writes
-
-- Read: the fallible fn and its callers
-- Write: none unless a playbook opened the task
-
-## Approval
-
-Adding `thiserror` / `anyhow` if they are not already in `Cargo.toml`.
-
-## RULES — no exceptions
-
-1. Library crates: preserve the existing typed error API; use a small handwritten `enum` or existing `thiserror` dependency implementing `Error` and needed conversions
-2. Binary / app crates: use the existing error convention; `anyhow` with `.context()` is an option when already installed, not a required dependency
-3. `?` to propagate; `From` impls make `?` work
-4. No `.unwrap()` on user/IO/parse paths
-5. `.expect("…")` only for proven invariants (a bug if it fires)
-6. Messages: lowercase, no trailing punctuation
-7. Preserve `source` (`#[source]` / `.context()`)
-8. Document `# Errors` on public fallible fns
-
-## Example
-
-```rust
-use std::num::NonZeroU16;
-
-// ❌
-let n: u16 = s.parse().unwrap();
-
-// ✅ lib
-#[derive(Debug, thiserror::Error)]
-enum ParsePortError {
-    #[error("not a number")]
-    Num(#[from] std::num::ParseIntError),
-    #[error("port must be non-zero")]
-    Zero,
-}
-
-fn parse_port(s: &str) -> Result<NonZeroU16, ParsePortError> {
-    let n: u16 = s.parse()?;
-    NonZeroU16::new(n).ok_or(ParsePortError::Zero)
-}
-```
-
-## Steps
-
-1. Classify: recoverable vs invariant
-2. Recoverable → `Result` + `?`
-3. If the crate is a lib, keep `E` typed; if a bin, `anyhow` is enough
-
-## Validation
-
-No new `unwrap`/`expect` on IO/parse. `cargo test` covers the error variant.
-
-## Pitfalls
-
-| ❌ | ✅ |
-|----|----|
-| `unwrap` in a lib | `?` |
-| `expect("failed")` on a missing file | `Err` + context |
-| Swallow with `let _ =` | return or log once at the edge |
-
-## Integration
-
-Predecessor: `rust-essentials`. Successor: none.
+Test expected error variants and context at the boundary. Run `cargo check` and focused tests.

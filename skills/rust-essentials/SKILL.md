@@ -1,86 +1,30 @@
 ---
 name: rust-essentials
 type: atomic
-tags: [atomic]
-license: MIT
-description: >
-  MANDATORY before any .rs write. FCIS, ponytail ladder, parse-at-boundary,
-  Result + ?, iterators, match, naming. Trigger: rust, FCIS, idiomatic rust,
-  ownership intro, Result, newtype, clippy.
+description: Use for Rust implementation and crate API work. Establish project conventions, ownership, error handling, and version evidence before changing Rust code.
 metadata:
-  version: "1.0.0"
   user-invocable: "true"
 ---
 
-# Rust essentials
+# Rust Essentials
 
-Apply the [execution contract](../../docs/agent-contract.md) before this procedure.
+Read the crate's instructions, `Cargo.toml`, `Cargo.lock`, toolchain file, and the smallest relevant source/test neighbor. Follow the existing architecture and dependency choices.
 
-Canonical: [`docs/fcis-rust.md`](../../docs/fcis-rust.md)
+## API evidence
 
-## Goal
+Before using a crate method, feature, or import path, verify it for the pinned version from the lockfile and local crate source/docs, or compile a minimal use. Never infer an API from a newer example. Prove the change with `cargo check` or a focused test.
 
-Every `.rs` change follows FCIS and the ponytail ladder.
+## Implementation
 
-## Inputs / outputs
+- Parse untrusted input at the boundary; use types that encode meaningful invariants when they simplify callers.
+- Prefer borrowing (`&str`, slices, references) when ownership need not transfer. Clone when it makes ownership clearer or is required; explain only non-obvious costs.
+- Use `Result` and `?` for expected failures. Reserve `unwrap`/`expect` for proven invariants or tests.
+- Prefer standard library and existing dependencies. Add a crate only when the task needs it and its API/version are verified.
+- Use `Box`, `Arc`, `Rc`, and interior mutability when their ownership or layout semantics fit; do not add them as generic performance fixes.
+- Keep unsafe blocks rare and document the invariant that makes each block sound.
 
-- In: current crate + the behaviour to change
-- Out: Rust that compiles, no extra crates, illegal states unrepresentable
+For a focused question, use `ownership-borrowing`, `type-driven-design`, or `error-handling` from the active profile.
 
-## Reads / writes
+## Verification
 
-- Read: `Cargo.toml`, files the task already opened, `docs/fcis-rust.md` in this pack
-- Write: none unless a playbook opened the task
-
-## Approval
-
-Adding a dependency, `unsafe`, or toolchain install.
-
-## RULES — no exceptions
-
-1. Apply [`docs/fcis-rust.md`](../../docs/fcis-rust.md) (ladder + six FCIS rules). Do not restate them here.
-2. **Names:** types `UpperCamelCase`, fns `snake_case`, consts `SCREAMING_SNAKE`; acronyms as words (`HttpServer`)
-3. **Never skip:** trust-boundary parse, `Result`, `// SAFETY:`, one failing test for non-trivial logic
-
-## Example
-
-```rust
-// ❌
-fn bind(port: u16) -> std::net::SocketAddr {
-    format!("127.0.0.1:{port}").parse().unwrap()
-}
-
-// ✅
-use std::net::{Ipv4Addr, SocketAddr, SocketAddrV4};
-use std::num::NonZeroU16;
-
-fn bind(port: NonZeroU16) -> SocketAddr {
-    SocketAddr::V4(SocketAddrV4::new(Ipv4Addr::LOCALHOST, port.get()))
-}
-```
-
-## Steps
-
-1. Load this skill + `docs/fcis-rust.md`
-2. If the crate exists, run `load-context` first
-3. Apply RULES to the diff; do not add types/traits “for later”
-
-## Validation
-
-RED: `cargo test <test_name> -- --exact`. Done: commands in `docs/skill-authoring.md` (fmt, clippy `--all-targets -D warnings`, `cargo test`). No new deps. No `unwrap` on recoverable paths.
-
-## Pitfalls
-
-| ❌ | ✅ |
-|----|----|
-| New crate for what `std` does | `std` / existing dep |
-| `bool` pairs for states | `enum` |
-| Clone to please borrowck | restructure or borrow |
-| Essay comments | the type and the test |
-
-## Integration
-
-| Predecessor | This | Successor |
-|-------------|------|-----------|
-| `load-context` | rust-essentials | `ownership-borrowing`, `type-driven-design`, `error-handling` |
-| playbook `tdd` | rust-essentials | implementation after RED |
+Run `cargo fmt --check`, `cargo check`, focused tests, then `cargo clippy --all-targets -- -D warnings` and `cargo test` when the project supports them. A behavior change needs a test for the changed behavior; a mechanical refactor can rely on existing coverage plus compilation.

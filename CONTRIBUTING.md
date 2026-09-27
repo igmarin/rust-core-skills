@@ -11,11 +11,9 @@ This repository follows a Markdown + YAML frontmatter architecture for skills.
 
 1. Create `skills/<skill-name>/SKILL.md` following [docs/skill-authoring.md](docs/skill-authoring.md)
 2. `name` in frontmatter **must equal** the directory name
-3. Register in `directory.json` and group in `skills.sh.json`
-4. Add the skill to [docs/reference/skill-catalog.md](docs/reference/skill-catalog.md)
-5. Update `rust-skill-router` if the route table should mention it
-6. Playbooks also go in [docs/playbooks.md](docs/playbooks.md)
-7. Mention user-facing changes in `CHANGELOG.md`
+3. Register in `directory.json`; update `skills.sh.json` only if the display grouping needs it.
+4. Add it to the `rust` profile in the sibling `agnostic-planning-skills/profiles.json` only when it belongs in the installed profile.
+5. Mention user-facing changes in `CHANGELOG.md`.
 
 Do not add a root `SKILL.md`. Layout is flat: `skills/<name>/SKILL.md`.
 

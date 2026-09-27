@@ -1,4 +1,6 @@
-# FCIS for Rust
+# FCIS notes for Rust
+
+Optional learning material. `rust-essentials` contains the runtime guardrails and does not require loading this document.
 
 Pragmatic functional programming. Not Haskell-in-Rust.
 

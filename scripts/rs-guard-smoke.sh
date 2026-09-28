@@ -25,20 +25,6 @@ export RS_GUARD_INSTALL_DIR
 RS_GUARD_BIN="$RS_GUARD_INSTALL_DIR/rs-guard"
 DRY_RUN_BIN="$RS_GUARD_BIN"
 
-if [[ "$(uname -s)" != "Linux" ]]; then
-  if command -v rs-guard >/dev/null; then
-    DRY_RUN_BIN="rs-guard"
-  elif [[ -x "$HOME/.cargo/bin/rs-guard" ]]; then
-    DRY_RUN_BIN="$HOME/.cargo/bin/rs-guard"
-  elif [[ -x "$REPO_ROOT/bin/rs-guard-macos-arm64" ]]; then
-    DRY_RUN_BIN="$REPO_ROOT/bin/rs-guard-macos-arm64"
-  else
-    echo "On this host, install rs-guard 1.8.0 to run the API dry-run:" >&2
-    echo "  cargo install rs-guard --version 1.8.0 --locked" >&2
-    exit 1
-  fi
-fi
-
 echo "==> Verifying rs-guard config files"
 test -f "$REPO_ROOT/.reviewer.toml"
 test -f "$REPO_ROOT/.github/review-prompt.md"

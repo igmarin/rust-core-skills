@@ -15,4 +15,4 @@ index 1111111..2222222 100644
 +
  ## Steps
  
- 1. Load this skill + `docs/fcis-rust.md`
+ 1. Load `rust-essentials`; check the crate's `Cargo.toml` and `Cargo.lock`

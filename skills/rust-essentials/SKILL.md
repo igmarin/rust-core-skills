@@ -3,84 +3,34 @@ name: rust-essentials
 type: atomic
 tags: [atomic]
 license: MIT
-description: >
-  MANDATORY before any .rs write. FCIS, ponytail ladder, parse-at-boundary,
-  Result + ?, iterators, match, naming. Trigger: rust, FCIS, idiomatic rust,
-  ownership intro, Result, newtype, clippy.
+description: >-
+  Trigger: Rust implementation, crate API, Cargo.lock, dependency version,
+  compiler check. Establish project conventions and exact-version evidence
+  before changing Rust code.
 metadata:
-  version: "1.0.0"
+  version: 1.0.0
   user-invocable: "true"
 ---
 
-# Rust essentials
+# Rust Essentials
 
-Apply the [execution contract](../../docs/agent-contract.md) before this procedure.
+## RULES
 
-Canonical: [`docs/fcis-rust.md`](../../docs/fcis-rust.md)
-
-## Goal
-
-Every `.rs` change follows FCIS and the ponytail ladder.
-
-## Inputs / outputs
-
-- In: current crate + the behaviour to change
-- Out: Rust that compiles, no extra crates, illegal states unrepresentable
-
-## Reads / writes
-
-- Read: `Cargo.toml`, files the task already opened, `docs/fcis-rust.md` in this pack
-- Write: none unless a playbook opened the task
-
-## Approval
-
-Adding a dependency, `unsafe`, or toolchain install.
-
-## RULES — no exceptions
-
-1. Apply [`docs/fcis-rust.md`](../../docs/fcis-rust.md) (ladder + six FCIS rules). Do not restate them here.
-2. **Names:** types `UpperCamelCase`, fns `snake_case`, consts `SCREAMING_SNAKE`; acronyms as words (`HttpServer`)
-3. **Never skip:** trust-boundary parse, `Result`, `// SAFETY:`, one failing test for non-trivial logic
+1. Read the crate instructions, `Cargo.toml`, `Cargo.lock`, toolchain file, and the nearest relevant source or test. Follow existing architecture and dependencies.
+2. Verify every crate API, feature, or import path against the locked version using local crate source/docs or a minimal compile. Do not infer APIs from newer examples.
+3. Parse untrusted input at boundaries. Add types only for meaningful invariants; borrow when ownership need not transfer.
+4. Use `Result` and `?` for expected failures. Add a dependency only when needed and after verifying its pinned API.
+5. Keep `unsafe` rare and document the invariant that makes each block sound.
 
 ## Example
 
-```rust
-// ❌
-fn bind(port: u16) -> std::net::SocketAddr {
-    format!("127.0.0.1:{port}").parse().unwrap()
-}
-
-// ✅
-use std::net::{Ipv4Addr, SocketAddr, SocketAddrV4};
-use std::num::NonZeroU16;
-
-fn bind(port: NonZeroU16) -> SocketAddr {
-    SocketAddr::V4(SocketAddrV4::new(Ipv4Addr::LOCALHOST, port.get()))
-}
-```
-
-## Steps
-
-1. Load this skill + `docs/fcis-rust.md`
-2. If the crate exists, run `load-context` first
-3. Apply RULES to the diff; do not add types/traits “for later”
+- ✅ Confirm the locked crate version and compile the API use before relying on it.
+- ❌ Copy an API from the latest online example without checking the project's version.
 
 ## Validation
 
-RED: `cargo test <test_name> -- --exact`. Done: commands in `docs/skill-authoring.md` (fmt, clippy `--all-targets -D warnings`, `cargo test`). No new deps. No `unwrap` on recoverable paths.
-
-## Pitfalls
-
-| ❌ | ✅ |
-|----|----|
-| New crate for what `std` does | `std` / existing dep |
-| `bool` pairs for states | `enum` |
-| Clone to please borrowck | restructure or borrow |
-| Essay comments | the type and the test |
+In the target crate, run `cargo fmt --check`, `cargo check`, and focused tests. For behavior changes, add and run a regression test; run `cargo clippy --all-targets -- -D warnings` and `cargo test` when supported.
 
 ## Integration
 
-| Predecessor | This | Successor |
-|-------------|------|-----------|
-| `load-context` | rust-essentials | `ownership-borrowing`, `type-driven-design`, `error-handling` |
-| playbook `tdd` | rust-essentials | implementation after RED |
+This is the baseline for `ownership-borrowing`, `type-driven-design`, and `error-handling`.

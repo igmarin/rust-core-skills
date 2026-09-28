@@ -3,34 +3,13 @@
   "notGrouped": "bottom",
   "groupings": [
     {
-      "title": "Rust Core",
-      "description": "FCIS, ownership, type-driven design, and error handling. Load rust-essentials before any .rs write.",
+      "title": "Rust",
+      "description": "Ownership, types, error handling, and verified crate APIs.",
       "skills": [
         "rust-essentials",
         "ownership-borrowing",
         "type-driven-design",
         "error-handling"
-      ]
-    },
-    {
-      "title": "Project",
-      "description": "Context loading for an existing crate.",
-      "skills": [
-        "load-context"
-      ]
-    },
-    {
-      "title": "Playbooks",
-      "description": "Multi-step human-in-the-loop flows with hard gates.",
-      "skills": [
-        "tdd"
-      ]
-    },
-    {
-      "title": "Orchestration",
-      "description": "Entry-point skill router. Does not implement.",
-      "skills": [
-        "rust-skill-router"
       ]
     }
   ]

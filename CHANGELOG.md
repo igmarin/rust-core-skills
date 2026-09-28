@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-09-26
+
+- Breaking profile release: reduced the pack to four Rust cards and removed `load-context`, `tdd`, and `rust-skill-router`. See README.md for the migration map.
+- Removed the bundled macOS rs-guard binary and checksums; CI and the smoke script install pinned crates.io version 1.8.0.
 - White-canvas catalog: FCIS docs, taxonomy, `directory.json`, language spine skills, TDD playbook.
 - Preserve catalog identities while linking every skill to a portable execution contract: existing authorization, truthful test evidence, project conventions, and resumable handoffs.
 - Repair routing and instruction contradictions without changing supported capabilities.

@@ -3,81 +3,33 @@ name: ownership-borrowing
 type: atomic
 tags: [atomic]
 license: MIT
-description: >
-  Borrow before clone. Accept &[T]/&str. Arc vs Rc. Interior mutability last.
-  Trigger: clone, borrow, lifetime, Arc, Rc, RefCell, Mutex, Cow, ownership.
+description: >-
+  Trigger: Rust ownership, borrowing, lifetime, clone, Arc, Rc, shared state.
+  Use when a change affects who owns or mutates a value.
 metadata:
-  version: "1.0.0"
+  version: 1.0.0
   user-invocable: "true"
 ---
 
-# Ownership and borrowing
+# Ownership and Borrowing
 
-Apply the [execution contract](../../docs/agent-contract.md) before this procedure.
+## RULES
 
-## Goal
-
-No allocation that a borrow would cover. Shared mutability only when the type system requires it.
-
-## Inputs / outputs
-
-- In: a function or type that owns or shares data
-- Out: API that takes the least ownership it needs
-
-## Reads / writes
-
-- Read: the function and its callers
-- Write: none unless a playbook opened the task
-
-## Approval
-
-None to drop clones. State lifecycle and concurrency cost before adding `Arc`, `Rc`, `Mutex`, `RwLock`, or `RefCell`; stop for approval if that choice changes the accepted design or scope.
-
-## RULES — no exceptions
-
-1. Prefer `&T` / `&mut T` over `.clone()`
-2. Accept `&[T]` not `&Vec<T>`; `&str` not `&String`
-3. `Cow<'_, T>` only when you sometimes own
-4. `Arc<T>` across threads; `Rc<T>` single-thread only
-5. `RefCell` / `Mutex` / `RwLock` last; document why
-6. `Copy` for tiny, obviously copyable types; otherwise explicit `Clone`
-7. Move large values; `Box` if the move itself is the cost
-8. Elide lifetimes until the compiler asks
+1. Borrow with `&T`, `&str`, or slices when the callee only reads and the caller keeps ownership.
+2. Take ownership when the callee stores, transforms, or transfers the value.
+3. Clone when it simplifies ownership or is required; inspect callers before removing an existing clone.
+4. Use `Arc` for shared ownership across threads and `Rc` within one thread. Add synchronization or interior mutability only for shared mutation.
+5. Use `Box` for indirection, recursive types, or a deliberate layout/API requirement. Let the compiler infer lifetimes unless the public contract needs explicit ones.
 
 ## Example
 
-```rust
-// ❌
-fn count_words(text: &String) -> usize {
-    text.clone().split_whitespace().count()
-}
-
-// ✅
-fn count_words(text: &str) -> usize {
-    text.split_whitespace().count()
-}
-```
-
-Clone is justified when storing, sending `'static` to a thread, or the type is `Copy`.
-
-## Steps
-
-1. Grep the touched fn for `.clone(`
-2. If the clone is not stored or sent, borrow
-3. Widen params to slices/str
+- ✅ Accept `&str` when a function only reads text and does not retain it.
+- ❌ Clone text into a temporary value only to read it once.
 
 ## Validation
 
-`cargo test` on the crate (or `cargo test <test_name> -- --exact` if a test is already red). Diff should drop clones or justify each remainder in one comment.
-
-## Pitfalls
-
-| ❌ | ✅ |
-|----|----|
-| `data.clone()` to call a reader | pass `&data` |
-| `Mutex` for a single-thread cache | `RefCell` or, better, owned local |
-| Lifetime soup | elide; name only `'src` / `'a` when needed |
+Check callers before changing a public ownership signature. Run `cargo check` and focused tests in the target crate.
 
 ## Integration
 
-Predecessor: `rust-essentials`. Successor: `type-driven-design`. Do not hold a lock across `.await`.
+Start with `rust-essentials`; pair with `type-driven-design` when ownership changes a type invariant.

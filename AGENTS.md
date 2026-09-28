@@ -5,4 +5,4 @@
 - `rust-essentials` owns the shared implementation baseline and crate-version checks.
 - Keep ownership, type design, and error handling cards focused on their distinct Rust concerns.
 - Do not state universal rules that force unnecessary clones, boxes, newtypes, or dependencies.
-- Run `python3 ../agnostic-planning-skills/scripts/validate-profiles.py` from the local project collection before release.
+- Run `python3 ../agnostic-planning-skills/scripts/validate-profiles.py` from the supported sibling checkouts before release.

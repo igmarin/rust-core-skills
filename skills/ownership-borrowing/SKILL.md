@@ -1,20 +1,35 @@
 ---
 name: ownership-borrowing
 type: atomic
-description: Use when changing Rust ownership, borrowing, lifetimes, cloning, or shared state.
+tags: [atomic]
+license: MIT
+description: >-
+  Trigger: Rust ownership, borrowing, lifetime, clone, Arc, Rc, shared state.
+  Use when a change affects who owns or mutates a value.
 metadata:
+  version: 1.0.0
   user-invocable: "true"
 ---
 
 # Ownership and Borrowing
 
-Follow the smallest ownership contract that keeps the code clear.
+## RULES
 
-- Borrow with `&T`, `&str`, or slices when the callee only reads data and the caller keeps ownership.
-- Take ownership when the callee stores, transforms, or transfers the value.
-- Clone when it simplifies ownership or enables the required lifetime; do not remove a clear clone without understanding why it exists.
-- Use `Arc` for shared ownership across threads and `Rc` for single-threaded shared ownership. Add locks or interior mutability only when shared mutation is part of the design.
-- Use `Box` for indirection, recursive types, or a deliberate layout/API requirement. Ordinary moves are usually cheap and do not need boxing.
-- Let the compiler infer lifetimes until a public contract requires explicit ones.
+1. Borrow with `&T`, `&str`, or slices when the callee only reads and the caller keeps ownership.
+2. Take ownership when the callee stores, transforms, or transfers the value.
+3. Clone when it simplifies ownership or is required; inspect callers before removing an existing clone.
+4. Use `Arc` for shared ownership across threads and `Rc` within one thread. Add synchronization or interior mutability only for shared mutation.
+5. Use `Box` for indirection, recursive types, or a deliberate layout/API requirement. Let the compiler infer lifetimes unless the public contract needs explicit ones.
 
-Check callers before changing a public ownership signature. Run focused tests and `cargo check`.
+## Example
+
+- ✅ Accept `&str` when a function only reads text and does not retain it.
+- ❌ Clone text into a temporary value only to read it once.
+
+## Validation
+
+Check callers before changing a public ownership signature. Run `cargo check` and focused tests in the target crate.
+
+## Integration
+
+Start with `rust-essentials`; pair with `type-driven-design` when ownership changes a type invariant.

@@ -1,19 +1,34 @@
 ---
 name: error-handling
 type: atomic
-description: Use when changing Rust error propagation, public error types, or recoverable failure behavior.
+tags: [atomic]
+license: MIT
+description: >-
+  Trigger: Rust error handling, Result, ?, typed errors, recoverable failures,
+  error propagation. Use when changing a failure contract.
 metadata:
+  version: 1.0.0
   user-invocable: "true"
 ---
 
 # Error Handling
 
-Preserve the crate's existing error contract. Use `Result` for failures callers can handle; reserve panic for violated internal invariants.
+## RULES
 
-- Propagate expected errors with `?` and add context at the boundary where it helps diagnose the operation.
-- Preserve typed errors when they are part of a library's public API. A small enum or the crate's existing error dependency is sufficient.
-- In applications, follow the existing convention. `anyhow` or a similar crate is optional when already used; do not add a dependency just to wrap one error.
-- Do not unwrap user input, IO, network, or parse results. `expect` is appropriate only when the invariant is local and its violation indicates a bug.
-- Keep error messages useful and avoid exposing secrets or sensitive input.
+1. Preserve the crate's existing error contract. Use `Result` for recoverable failures and reserve panic for violated internal invariants.
+2. Propagate expected errors with `?`; add context at a boundary when it improves diagnosis.
+3. Preserve public typed errors. Follow the application's existing convention; do not add a dependency just to wrap one failure.
+4. Do not unwrap user input, I/O, network, or parse results. Keep error messages useful without exposing secrets or sensitive input.
 
-Test expected error variants and context at the boundary. Run `cargo check` and focused tests.
+## Example
+
+- ✅ Propagate a file-read failure with `?` using the crate's existing error type.
+- ❌ Panic on a missing file that is part of ordinary input.
+
+## Validation
+
+Test expected error variants and boundary context; run `cargo check` and focused tests in the target crate.
+
+## Integration
+
+Start with `rust-essentials`; pair with `type-driven-design` when an error type encodes a domain invariant.

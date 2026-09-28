@@ -19,5 +19,11 @@
     "error-handling": {
       "path": "skills/error-handling/SKILL.md"
     }
+  },
+  "inventory": {
+    "atomic": 4,
+    "playbooks": 0,
+    "orchestrators": 0,
+    "total": 4
   }
 }

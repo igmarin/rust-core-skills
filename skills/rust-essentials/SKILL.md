@@ -1,30 +1,36 @@
 ---
 name: rust-essentials
 type: atomic
-description: Use for Rust implementation and crate API work. Establish project conventions, ownership, error handling, and version evidence before changing Rust code.
+tags: [atomic]
+license: MIT
+description: >-
+  Trigger: Rust implementation, crate API, Cargo.lock, dependency version,
+  compiler check. Establish project conventions and exact-version evidence
+  before changing Rust code.
 metadata:
+  version: 1.0.0
   user-invocable: "true"
 ---
 
 # Rust Essentials
 
-Read the crate's instructions, `Cargo.toml`, `Cargo.lock`, toolchain file, and the smallest relevant source/test neighbor. Follow the existing architecture and dependency choices.
+## RULES
 
-## API evidence
+1. Read the crate instructions, `Cargo.toml`, `Cargo.lock`, toolchain file, and the nearest relevant source or test. Follow existing architecture and dependencies.
+2. Verify every crate API, feature, or import path against the locked version using local crate source/docs or a minimal compile. Do not infer APIs from newer examples.
+3. Parse untrusted input at boundaries. Add types only for meaningful invariants; borrow when ownership need not transfer.
+4. Use `Result` and `?` for expected failures. Add a dependency only when needed and after verifying its pinned API.
+5. Keep `unsafe` rare and document the invariant that makes each block sound.
 
-Before using a crate method, feature, or import path, verify it for the pinned version from the lockfile and local crate source/docs, or compile a minimal use. Never infer an API from a newer example. Prove the change with `cargo check` or a focused test.
+## Example
 
-## Implementation
+- ✅ Confirm the locked crate version and compile the API use before relying on it.
+- ❌ Copy an API from the latest online example without checking the project's version.
 
-- Parse untrusted input at the boundary; use types that encode meaningful invariants when they simplify callers.
-- Prefer borrowing (`&str`, slices, references) when ownership need not transfer. Clone when it makes ownership clearer or is required; explain only non-obvious costs.
-- Use `Result` and `?` for expected failures. Reserve `unwrap`/`expect` for proven invariants or tests.
-- Prefer standard library and existing dependencies. Add a crate only when the task needs it and its API/version are verified.
-- Use `Box`, `Arc`, `Rc`, and interior mutability when their ownership or layout semantics fit; do not add them as generic performance fixes.
-- Keep unsafe blocks rare and document the invariant that makes each block sound.
+## Validation
 
-For a focused question, use `ownership-borrowing`, `type-driven-design`, or `error-handling` from the active profile.
+In the target crate, run `cargo fmt --check`, `cargo check`, and focused tests. For behavior changes, add and run a regression test; run `cargo clippy --all-targets -- -D warnings` and `cargo test` when supported.
 
-## Verification
+## Integration
 
-Run `cargo fmt --check`, `cargo check`, focused tests, then `cargo clippy --all-targets -- -D warnings` and `cargo test` when the project supports them. A behavior change needs a test for the changed behavior; a mechanical refactor can rely on existing coverage plus compilation.
+This is the baseline for `ownership-borrowing`, `type-driven-design`, and `error-handling`.

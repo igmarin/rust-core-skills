@@ -48,7 +48,7 @@ Canonical: `docs/skill-authoring.md`.
 
 - No personal paths: `/Users/`, `/home/<name>/`, `C:\`, vault/iCloud, `~/.cursor`, `~/.claude`, `~/.grok` as instructions
 - No secrets, tokens, or API keys in skills, docs, or examples
-- Paths must be project-relative (`Cargo.toml`, `src/`, `tests/`, `skills/…/assets/…`)
+- Paths in repository instructions, skills, and examples must be project-relative (`Cargo.toml`, `src/`, `tests/`, `skills/…/assets/…`). Cross-repository paths may target only the declared `agnostic-planning-skills` dependency for its profile manifest or validator, using the supported sibling-checkout layout.
 - Adding a crate, `rustup`, writes outside the current crate, push, or publish must be an **approval** gate
 - Example crate names must be generic (`app`, `lib`) — never `brigid`, `rs-guard`, `rs-nightshift`, `agent-mcp-runtime` as if they were the user’s crate
 - Example hosts must be `example.com` / `example.org` / `example.net` (or a subdomain)

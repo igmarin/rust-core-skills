@@ -13,6 +13,6 @@ A compact Rust profile for project work and deliberate learning. Install it alon
 
 | Old skill | Use |
 |---|---|
-| `load-context`, `tdd`, `rust-skill-router` | `work-router` selects one Rust card; `rust-essentials` performs the project preflight |
+| `load-context`, `tdd`, `rust-skill-router` | `agnostic-planning-skills:work-router` selects one Rust card; `rust-essentials` performs the project preflight |
 
 Verify crate APIs against `Cargo.lock` and compiler/docs evidence. Start at the [docs index](docs/index.md) for maintainer notes.
